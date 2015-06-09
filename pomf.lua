@@ -4,8 +4,7 @@ local item_type = os.getenv('item_type')
 local item_value = os.getenv('item_value')
   
 wget.callbacks.httploop_result = function(url, err, http_stat)
-  -- NEW for 2014: Slightly more verbose messages because people keep
-  -- complaining that it's not moving or not working
+  status_code = http_stat["statcode"]
   
   url_count = url_count + 1
   io.stdout:write(url_count .. "=" .. status_code .. " " .. url["url"] .. ".  \n")
