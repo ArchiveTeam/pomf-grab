@@ -198,7 +198,7 @@ class WgetArgs(object):
         
         if item_type == 'file':
             wget_args.append('http://a.pomf.se/{0}'.format(item_value))
-        if item_type == 'paste':
+        elif item_type == 'paste':
             wget_args.append('http://p.pomf.se/{0}'.format(item_value))
             wget_args.append('http://p.pomf.se/?dl={0}'.format(item_value))
         else:
