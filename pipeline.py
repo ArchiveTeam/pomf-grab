@@ -166,7 +166,7 @@ class WgetArgs(object):
             WGET_LUA,
             "-U", USER_AGENT,
             "-nv",
-#            "--lua-script", "pomf.lua",
+            "--lua-script", "pomf.lua",
             "-o", ItemInterpolation("%(item_dir)s/wget.log"),
             "--no-check-certificate",
             "--output-document", ItemInterpolation("%(item_dir)s/wget.tmp"),
@@ -178,7 +178,7 @@ class WgetArgs(object):
 #            "--page-requisites",
             "--timeout", "30",
             "--tries", "inf",
-#            "--domains", "google.com",
+#            "--domains", "pomf.se",
             "--span-hosts",
             "--waitretry", "30",
             "--warc-file", ItemInterpolation("%(item_dir)s/%(warc_file_base)s"),
@@ -194,10 +194,13 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ('file')
+        assert item_type in ('file', 'paste')
         
         if item_type == 'file':
             wget_args.append('http://a.pomf.se/{0}'.format(item_value))
+        if item_type == 'paste':
+            wget_args.append('http://p.pomf.se/{0}'.format(item_value))
+            wget_args.append('http://p.pomf.se/?dl={0}'.format(item_value))
         else:
             raise Exception('Unknown item')
         
